@@ -1,6 +1,6 @@
 # Gemini Chatbot with Streamlit
 
-A conversational question-answer chatbot built with Streamlit and Google's Gemini Pro API. The chatbot automatically saves all conversations and displays them in a beautiful chat interface.
+A conversational question-answer chatbot built with Streamlit and Google's Gemini gemini-2.5-flash API. The chatbot automatically saves all conversations and displays them in a beautiful chat interface.
 Features
 
     💬 Conversational Q&A chatbot using Gemini Pro    
@@ -63,5 +63,5 @@ Requirements
     python-dotenv
 
 
-    The chatbot uses Gemini Pro model with optimized settings
+    The chatbot uses Gemini gemini-2.5-flash model with optimized settings
     All conversations include timestamps
