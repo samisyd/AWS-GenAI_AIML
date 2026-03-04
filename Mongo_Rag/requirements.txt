@@ -1,0 +1,11 @@
+pymongo
+openai
+langchain
+langchain-community
+langchain-openai
+langchain-groq
+langchain-text-splitters
+python-dotenv
+ipykernel
+pypdf
+
