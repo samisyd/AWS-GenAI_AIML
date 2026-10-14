@@ -1,0 +1,115 @@
+1. Create a Role named LambdaExecutionRole and service type is lambda and give 
+following permissions to it.. 
+
+AmazonRekognitionFullAccess
+AmazonPollyFullAccess
+AmazonS3FullAccess
+AWSLambdaBasicExecutionRole
+CloudWatchFullAccess
+
+2. Create 2 buckets Input and output bucket
+
+In input bucket with name - rekognition-input-audio save file retail-shelp.jpg and 
+give following policy to it 
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowRekognitionService",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "rekognition.amazonaws.com"
+      },
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": "arn:aws:s3:::rekognition-input-images-634602958025-us-east-1-an/*" #change your arn name 
+    },
+    {
+      "Sid": "AllowLambdaRole",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::634602958025:role/SmartRetailLambdaRole" 
+      },
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::rekognition-input-images-634602958025-us-east-1-an",
+        "arn:aws:s3:::rekognition-input-images-634602958025-us-east-1-an/*"
+      ]
+    }
+  ]
+}
+
+3. Create Output bucket named - rekognition-output-audio and give following policy 
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowLambdaPutObject",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::634602958025:role/SmartRetailLambdaRole"
+      },
+      "Action": [
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::rekognition-output-audio-634602958025-us-east-1-an",
+        "arn:aws:s3:::rekognition-output-audio-634602958025-us-east-1-an/*"
+      ]
+    }
+  ]
+}
+
+
+4. Create a lambda funtion.py and Create a Async test event and give the following in Event json 
+
+{
+  "Records": [
+    {
+      "s3": {
+        "bucket": {
+          "name": "rekognition-input-images-274285228998-us-east-2-an"
+        },
+        "object": {
+          "key": "retail-shelf.jpg"
+        }
+      }
+    }
+  ]
+}
+
+5. Create a Lmabda trigger - select s3 bucket as
+ trigger - rekognition-input-images-634602958025-us-east-1-an
+and select All object create events with PUT so the Lambda function runs 
+whenever a new file is uploaded.
+In the Suffix field, enter .jpg to trigger the function only for image files.
+
+Then select the acknowledgment checkbox and click Add to create the trigger. 
+A confirmation message appears showing that the S3 trigger has been added
+ successfully to the SmartRetailVisionNarrator Lambda function. The function 
+will now run automatically whenever a new .jpg file is uploaded to the selected bucket.
+
+Test the full flow. Go to the s3 input bucket and try to delete and reload the file. The 
+lambda func will get triggered and outpur will be saved in the output bucket
+
+
+
+1. Create a domain in SageMakerStudio and give following permissions/ IAM Roles to it.
+
+⚠️ Make sure your SageMaker / JupyterLab IAM Execution Role has the following policies attached:
+AmazonRekognitionFullAccess — to detect labels from images
+AmazonPollyFullAccess — to convert text to speech (MP3)
+AmazonS3FullAccess — to read/write images and audio files
+AWSLambda_FullAccess — to create and deploy Lambda functions
+IAMFullAccess — to create IAM roles for Lambda
+
+2. Run the SmartRetailVisionNarrator.ipynb in the jupiter notebooks 
+with the image file also uploaded
