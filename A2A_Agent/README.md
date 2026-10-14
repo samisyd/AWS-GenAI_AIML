@@ -11,20 +11,6 @@ an MCP server.
 
 The diagram below shows how the services in this example connect:
 
-```text
-Your HTTP request
-       |
-       v
-HR Agent (127.0.0.1:8000)
-       |
-       | A2A
-       v
-Employee Agent (localhost:8001)
-       |
-       | MCP over streamable HTTP
-       v
-Employee MCP Server (127.0.0.1:8002)
-```
 
 ## Project contents
 
@@ -37,7 +23,6 @@ Employee MCP Server (127.0.0.1:8002)
 - `strands-a2a-inter-agent/employee_data.py` generates sample employees and
   skills when the MCP server starts.
 - `a2a-communication.ipynb` contains the Lab 05 notebook walkthrough.
-- `Lab5-Deck.pdf` contains the accompanying lab slides.
 
 ## Requirements
 
