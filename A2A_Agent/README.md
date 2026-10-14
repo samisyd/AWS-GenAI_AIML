@@ -22,7 +22,7 @@ The diagram below shows how the services in this example connect:
 - `strands-a2a-inter-agent/server.py` exposes employee and skill lookup tools.
 - `strands-a2a-inter-agent/employee_data.py` generates sample employees and
   skills when the MCP server starts.
-- `a2a-communication.ipynb` contains the Lab 05 notebook walkthrough.
+- `a2a-communication.ipynb` 
 
 ## Requirements
 
