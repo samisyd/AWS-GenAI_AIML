@@ -21,6 +21,8 @@ The workflow is:
 Upload Image -> S3 Input Bucket -> Lambda Trigger -> Rekognition -> Polly -> S3 Output Bucket
 ```
 
+![Architecture](Arch_Diag.jpg)
+
 ## Files in This Project
 
 - `Lamda_function.py` - AWS Lambda function that detects image labels and synthesizes speech.
